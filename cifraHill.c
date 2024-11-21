@@ -55,6 +55,7 @@ int main()
     printf("A Matriz que deseja ser criptografada é M = {2, 15, 1, 14}{15, 9, 20, 5} que no alfabeto significa BOA NOITE. \n");
     printf("A matriz M criptografada será: %i \n");
     printMatrix(C, linA, colM);
-
+    printf("Agora BOA NOITE vira VWK RYEZC");
+    
     return 0;
 }
