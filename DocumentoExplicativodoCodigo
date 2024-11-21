@@ -1,0 +1,62 @@
+# include <stdio.h>
+# include <locale.h>
+
+# define MAX 10
+
+void multDiv(int A[MAX][MAX], int M[MAX][MAX], int C[MAX][MAX], int linA, int colA, int linM, int colM) // função criada para multiplicar e dividir os valores das matrizes A e M e guardar tais valores na matriz C
+{
+    for (int i = 0; i < linA; i++) 
+    {
+        for (int j = 0; j < colM; j++) 
+        {
+            C[i][j] = 0; // foi necessário inicializar C = 0, para que quando a equação for realizada, não haja um problema matemático como esse (x×y)+(z×x)=(w+z)×x.
+
+            for (int k = 0; k < colA; k++) 
+            {
+                C[i][j] += A[i][k] * M[k][j];  // essa equação é a multipicação de A * M e também a sua soma, para que sejam guardados os valores dentro da matriz C.
+            }
+            C[i][j] = C[i][j] % 26; // valor dado pela multiplicação de A * M e sua soma será dividido por 26 e será armazenado na matriz C apenas o resto dessa divisão.
+        }
+    }    
+}
+
+// Está parte vai fazer com que haja um printf para a matriz C, que no caso será a matriz M codificada, e ele imprima a matriz inteira.
+void printMatrix(int matrix[MAX][MAX], int lin, int col) 
+{
+    for (int i = 0; i < lin; i++) 
+    {
+        for (int j = 0; j < col; j++) 
+        {
+            printf("%i ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+
+    int A[MAX][MAX] = 
+    {
+        {5, 6}, 
+        {2, 3}
+    };
+
+    int M[MAX][MAX] = 
+    {
+        {2, 1, 15, 20},
+        {15, 14, 9, 5}
+    };
+
+    int C[MAX][MAX];
+    int linA = 2, linM = 2, colA = 2, colM = 4;
+
+    multDiv(A, M, C, linA, colA, linM, colM);
+
+    printf("A Matriz que deseja ser criptografada é M = {2, 15, 1, 14}{15, 9, 20, 5} que no alfabeto significa BOA NOITE. \n");
+    printf("A matriz M criptografada será: %i \n");
+    printMatrix(C, linA, colM);
+    printf("Agora BOA NOITE vira VWK RYEZC");
+    
+    return 0;
+}
